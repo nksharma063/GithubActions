@@ -27,13 +27,12 @@ jobs:
         run: |
           # testing scripts
           
-      - name: Deployment step
-        env:
-          HOST: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          KEY: ${{ secrets.KEY }}
-          PORT: ${{ secrets.PORT }}
-        run: |
-          whoami
-          cd ~
-          echo "hello world"
+      - name: deployment step
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            whoami
