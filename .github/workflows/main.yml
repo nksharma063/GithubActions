@@ -8,12 +8,14 @@ on:
   #push , pull, stash, merge, lb, tag.
   #we can define the branch and action associated, make sure that branch , mae sure .github need to be the same branch.
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
   # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+  #workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -21,25 +23,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     
-      - name: code checkout
-        uses: actions/checkout@v2
+    - name: code checkout
+      uses: actions/checkout@v2
         
-      - name: install dependies
-        run:  |
-          sudo apt update
-          sudo apt install nginx -y
+    - name: install dependies
+      run:  |
+        sudo apt update
+        sudo apt install nginx -y
           
-      - name: build and test
-        run: |
-          # testings scripts
+    - name: build and test
+      run: |
+        # testings scripts
           
-      - name: deployement step
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          port: ${{ secrets.PORT }}
-          script: |
+    - name: deployement step
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.PORT }}
+        script: |
             whoami
             cd ~
             echo "hello world"
